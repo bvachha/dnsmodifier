@@ -17,5 +17,8 @@ class Config(object):
     SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL')
     if not SQLALCHEMY_DATABASE_URI:
         raise ValueError("Please set the DNS db path in the environment")
+    API_KEY = os.environ.get('API_KEY')
+    if not API_KEY:
+        raise ValueError("Please set the API_KEY in the environment")
     DEBUG = True
     SQLALCHEMY_TRACK_MODIFICATIONS = False
