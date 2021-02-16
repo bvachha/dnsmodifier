@@ -5,7 +5,7 @@ from flask import request, jsonify
 from app import app
 
 
-def apicheck(func):
+def api_check(func):
     """
     decorator to check if the api call contains a header with the valid api key and return an error if it fails the check
     :param func: function to be wrapped
