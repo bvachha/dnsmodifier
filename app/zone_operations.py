@@ -54,7 +54,9 @@ def do_zone_delete():
     db.session.delete(zone_record)
     db.session.commit()
     app.logger.info(f"Zone {zone_record.name} successfully deleted")
-    return {"info": f"zone {zone_record.name} successfully deleted"}
+    return {
+        "status": "ok",
+        "info": f"zone {zone_record.name} successfully deleted"}
 
 
 def do_zone_get():
