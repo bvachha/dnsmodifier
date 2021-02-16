@@ -1,0 +1,6 @@
+APP_SECRET_KEY=''
+export APP_SECRET_KEY
+DATABASE_URL='sqlite:////<path to db file>'
+export DATABASE_URL
+API_KEY='SET API KEY FOR INCOMING CONNECTIONS'
+export API_KEY
