@@ -2,7 +2,6 @@ from flask import request, jsonify
 
 from app import app, db
 from app.models import Record, Domain
-from app.routes import update_record
 from app.validators import new_record_validator, DNS_TYPES
 
 
@@ -102,3 +101,9 @@ def get_resource_records():
         }
         response.append(rrecord)
     return jsonify(response)
+
+
+def update_record(record, req_record_data):
+    record.content = req_record_data.get('content')
+    record.ttl = req_record_data.get('ttl') or record.ttl
+    record.prio = req_record_data.get('priority') or record.prio

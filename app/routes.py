@@ -20,12 +20,6 @@ def get_zone_names():
         return do_zone_delete()
 
 
-def update_record(record, req_record_data):
-    record.content = req_record_data.get('content')
-    record.ttl = req_record_data.get('ttl') or record.ttl
-    record.prio = req_record_data.get('priority') or record.prio
-
-
 @app.route('/api/zone-records/', methods=['GET', 'POST', 'DELETE'])
 @api_check
 def zone_records_operations():
