@@ -6,13 +6,11 @@ def zone_validator(zone_data):
         return False, "Name is a required field"
     if not zone_data.get('name').endswith("."):
         return False, "Name must be a canonical name"
-    if not zone_data.get("nameservers"):
-        return False, "Please provide one or more nameservers for your zone"
-    if not zone_data.get("nameservers")[0]:
-        return False, "Please provide one or more nameservers for your zone"
-    for ns_host in zone_data.get("nameservers"):
-        if not hostname_validator(ns_host):
-            return False, f"nameserver {ns_host} is not a valid hostname"
+    if not zone_data.get("nameserver"):
+        return False, "Please provide a nameserver for your zone"
+    ns_host = zone_data.get("nameserver")
+    if not hostname_validator(ns_host):
+        return False, f"nameserver {ns_host} is not a valid hostname"
     if not zone_data.get("rname"):
         return False, "Please provide registered admin email(rname) for your zone"
     email_validator = re.compile(r'^[a-zA-Z0-9_\.\-]+@([a-zA-Z0-9_\-]\.?)+$')
@@ -41,6 +39,21 @@ def mx_record_validator(record):
         return False, "Expecting an integer value for priority of mx server"
     if not hostname_validator(mx_host):
         return False, "Specify a valid host name for the mail server"
+    return True, None
+
+
+def ns_record_validator(record):
+    """
+    checks the fields in the ns record for sanity
+    :param record:
+    :return:
+    """
+    valid, error = content_field_validator(record=record)
+    if not valid:
+        return valid, error
+    ns_host = record.get("content")
+    if not hostname_validator(ns_host):
+        return False, "Specify a valid host as a name server"
     return True, None
 
 
@@ -74,7 +87,7 @@ DNS_TYPES = {
     "A": a_record_validator,
     "CNAME": cname_validator,
     "MX": mx_record_validator,
-    # "NS": None, Todo add the validation logic for the NS records
+    "NS": ns_record_validator,
     "TXT": txt_record_validator,
 }
 
