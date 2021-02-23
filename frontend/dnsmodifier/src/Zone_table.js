@@ -137,8 +137,8 @@ class ZoneTable extends React.Component{
             <td>{this.props.name}</td>
             <td>
               <div class="d-grid gap-2 d-md-block">
-                <button type="button" class="btn btn-outline-primary" id="edit-zone" onClick={this.zone_edit}>Edit Zone Records</button>
-                <button type="button" class="btn btn-outline-danger" id="delete-zone" onClick={this.confirmDelete}>Delete Zone</button>
+                <button type="button" className="btn btn-outline-primary" id="edit-zone" onClick={this.zone_edit}>Edit Zone Records</button>
+                <button type="button" className="btn btn-outline-danger" id="delete-zone" onClick={this.confirmDelete}>Delete Zone</button>
               </div> 
             </td>
         </tr>
