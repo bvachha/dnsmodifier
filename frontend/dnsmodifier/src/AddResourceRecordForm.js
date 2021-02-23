@@ -55,13 +55,18 @@ class AddResourceRecordForm extends React.Component{
         <h2> Add new resource record </h2>
         <form  onSubmit={this.handleSubmit} onChange={this.handleChange}>
           <label class="form-label">Name</label>
-          <input class="form-control" type="text" name="name" value={this.state.name} />
+          <input class="form-control"
+          type="text" name="name"
+          value={this.state.name}
+          placeholder="For sub.example.com in example.com zone, type sub. Leave Blank for zone level records" />
           <br/>
           <label class="form-label">Type</label>
-          <input class="form-control" type="text" name="type" value={this.state.nameservers} />
+          <input class="form-control" type="text" name="type" value={this.state.type}
+          placeholder="Accepted types: NS,MX,A,TXT,CNAME"/>
           <br/>
           <label class="form-label">Content</label>
-          <input class="form-control" type="text" name="content" value={this.state.content} />
+          <input class="form-control" type="text" name="content" value={this.state.content}
+          placeholder="Content of the record"/>
           <br/>
           <label class="form-label">TTL</label>
           <input class="form-control" type="text" name="ttl" value={this.state.ttl} />
