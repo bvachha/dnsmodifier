@@ -21,16 +21,14 @@ def build_zone_ns(zone_data, zone_id):
     :param zone_id: zone id value that the ns record maps to
     :return: list of nameserver records
     """
-    nameservers = []
-    for ns_value in zone_data['nameservers']:
-        ns_record = Record()
-        ns_record.domain_id = zone_id
-        ns_record.name = zone_data['name'].rstrip(".")
-        ns_record.type = "NS"
-        ns_record.content = ns_value
-        ns_record.ttl = 3600
-        nameservers.append(ns_record)
-    return nameservers
+    ns_value = zone_data['nameserver']
+    ns_record = Record()
+    ns_record.domain_id = zone_id
+    ns_record.name = zone_data['name'].rstrip(".")
+    ns_record.type = "NS"
+    ns_record.content = ns_value
+    ns_record.ttl = 3600
+    return ns_record
 
 
 def build_zone_soa(zone_data, zone_id):
@@ -40,7 +38,7 @@ def build_zone_soa(zone_data, zone_id):
     :param zone_data:incoming zone data dictionary
     :return: record object for the SOA record
     """
-    nameserver = zone_data['nameservers'][0]
+    nameserver = zone_data['nameserver']
     soa_record = Record()
     soa_record.domain_id = zone_id
     soa_record.name = zone_data['name'].rstrip(".")
