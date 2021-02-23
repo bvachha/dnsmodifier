@@ -70,18 +70,19 @@ The parameters that are used by the endpoint are
 ```
 
 <h2>DEPLOYMENT WITH DOCKER</h2>
-1. Create the environment file using the sample template .env.sample
-1. The API key values must be the same for API_KEY and REACT_APP_API_KEY
-1. Switch to the root of the project directory and run 
-   ```
-   sudo docker build -t dnsmod . 
-   ```
-1. Wait for the image to be built
-1. deploy the application using the following command
+
+* Create the environment file using the sample template .env.sample
+* The API key values must be the same for API_KEY and REACT_APP_API_KEY
+* Switch to the root of the project directory and run 
+```
+sudo docker build -t dnsmod . 
+```
+* Wait for the image to be built
+* deploy the application using the following command
 ```
 docker run -it --env-file <name of env file> -p 5300:53/udp -p 3000:3000/tcp -p 5000:5000/tcp dnsmod:latest
 ```
-1. You can now view the admin console on ```http://localhost:3000/```
-1. On making changes, you can verify that the changes are being served by pointing dig or any other dns tool to port 5300 on localhost and querying the DNS server there.
+* You can now view the admin console on ```http://localhost:3000/```
+* On making changes, you can verify that the changes are being served by pointing dig or any other dns tool to port 5300 on localhost and querying the DNS server there.
 
 
