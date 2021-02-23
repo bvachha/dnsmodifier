@@ -46,7 +46,7 @@ class App extends React.Component {
       return(
         <div>
           <ZoneTable onZoneEdit={this.editZone} />
-          <button type="button" class="btn btn-outline-success" onClick={()=>{
+          <button type="button" className="btn btn-outline-success" onClick={()=>{
               this.setState({
                 isEditZoneMode:false,
                 zoneIdUnderEdit:null,
