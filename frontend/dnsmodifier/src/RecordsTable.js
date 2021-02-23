@@ -28,7 +28,7 @@ class ZoneRecordsTable extends React.Component{
       let records = await response.json();
       console.log("zone records received: ", records)
       let recordSet = records.map(record =>
-        <ResourceRecordRow  record_data={record} deleteFunc={this.deleteResourceRecord} editFunc={this.editResourceRecord}/>
+        <ResourceRecordRow key={record.id} record_data={record} deleteFunc={this.deleteResourceRecord} editFunc={this.editResourceRecord}/>
       );
       this.setState({
         records: recordSet
@@ -49,7 +49,7 @@ class ZoneRecordsTable extends React.Component{
       alert("ERROR: " +json["error"])
     }
     else{
-      alert("Resource record Deleted")
+      alert("Resource record Deleted");
       this.getZoneRecords();
     }
   })
