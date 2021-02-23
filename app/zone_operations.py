@@ -28,13 +28,18 @@ def do_zone_build():
         zone_record = Domain.query.filter_by(name=zone_record.name).first()
         if not zone_record:
             app.logger.error("No Zone record found")
-        ns_record_list = build_zone_ns(json_request, zone_record.id)
-        soa_record = build_zone_soa(json_request, zone_record.id)
-        for ns_record in ns_record_list:
+        try:
+            ns_record = build_zone_ns(json_request, zone_record.id)
+            soa_record = build_zone_soa(json_request, zone_record.id)
             db.session.add(ns_record)
-        db.session.add(soa_record)
-        db.session.commit()
-        return {'status': 'ok'}
+            db.session.add(soa_record)
+            db.session.commit()
+            return {'status': 'ok'}
+        except Exception as e:
+            db.session.delete(zone_record)
+            db.session.commit()
+            error = "Something went wrong"
+            app.logger.error(f"ERROR: {e.with_traceback()}")
     return {"error": error}
 
 
